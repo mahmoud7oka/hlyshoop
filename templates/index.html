@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة توليد توكنات Discord</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fab fa-discord"></i> أداة توليد توكنات Discord</h1>
+                <p>أنشئ وأدر توكنات Discord بسهولة وأمان</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-btn active" onclick="showTab('generate')">
+                <i class="fas fa-plus-circle"></i> توليد توكن
+            </button>
+            <button class="nav-btn" onclick="showTab('validate')">
+                <i class="fas fa-check-circle"></i> التحقق من التوكن
+            </button>
+            <button class="nav-btn" onclick="showTab('manage')">
+                <i class="fas fa-list"></i> إدارة التوكنات
+            </button>
+        </nav>
+
+        <!-- Generate Token Tab -->
+        <div id="generate-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-magic"></i> توليد توكن جديد</h2>
+                </div>
+                <div class="card-body">
+                    <form id="generate-form">
+                        <div class="form-group">
+                            <label for="token-name">اسم التوكن:</label>
+                            <input type="text" id="token-name" placeholder="أدخل اسماً للتوكن..." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="token-type">نوع التوكن:</label>
+                            <select id="token-type">
+                                <option value="bot">توكن بوت (Bot Token)</option>
+                                <option value="user">توكن مستخدم (User Token)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> توليد التوكن
+                        </button>
+                    </form>
+                    
+                    <div id="generated-token" class="result-section" style="display: none;">
+                        <h3><i class="fas fa-key"></i> التوكن المُولد:</h3>
+                        <div class="token-display">
+                            <input type="text" id="token-output" readonly>
+                            <button onclick="copyToken()" class="btn btn-secondary">
+                                <i class="fas fa-copy"></i> نسخ
+                            </button>
+                        </div>
+                        <div class="token-info">
+                            <p><strong>معرف التوكن:</strong> <span id="token-id"></span></p>
+                            <p><strong>تاريخ الإنشاء:</strong> <span id="token-date"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validate Token Tab -->
+        <div id="validate-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-shield-alt"></i> التحقق من صحة التوكن</h2>
+                </div>
+                <div class="card-body">
+                    <form id="validate-form">
+                        <div class="form-group">
+                            <label for="validate-token">التوكن للتحقق:</label>
+                            <textarea id="validate-token" placeholder="الصق التوكن هنا..." rows="3" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> التحقق من التوكن
+                        </button>
+                    </form>
+                    
+                    <div id="validation-result" class="result-section" style="display: none;">
+                        <div class="validation-status">
+                            <div id="format-check" class="check-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>فحص التنسيق: <span class="status"></span></span>
+                            </div>
+                            <div id="api-check" class="check-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>فحص API: <span class="status"></span></span>
+                            </div>
+                        </div>
+                        <div id="validation-message" class="message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Tokens Tab -->
+        <div id="manage-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-database"></i> إدارة التوكنات المحفوظة</h2>
+                    <button onclick="loadTokens()" class="btn btn-secondary">
+                        <i class="fas fa-refresh"></i> تحديث
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div id="tokens-list" class="tokens-container">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+
+    <!-- Token Details Modal -->
+    <div id="token-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> تفاصيل التوكن</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="token-details">
+                    <div class="detail-item">
+                        <strong>الاسم:</strong> <span id="modal-token-name"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>النوع:</strong> <span id="modal-token-type"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>تاريخ الإنشاء:</strong> <span id="modal-token-date"></span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>التوكن:</strong>
+                        <div class="token-display">
+                            <input type="password" id="modal-token-value" readonly>
+                            <button onclick="toggleTokenVisibility()" class="btn btn-secondary">
+                                <i id="visibility-icon" class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="copyModalToken()" class="btn btn-secondary">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
