@@ -19,7 +19,9 @@ setTimeout(() => {
 ///////
 /////////////////////////////////////
 
-const { MessageButton, MessageEmbed, MessageActionRow } = require("discord.js");
+const { MessageButton, MessageEmbed, MessageActionRow, MessageAttachment } = require("discord.js");
+const Canvas = require('canvas');
+const fs = require('fs');
 
 const express = require('express');
 
