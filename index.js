@@ -19,7 +19,9 @@ setTimeout(() => {
 ///////
 /////////////////////////////////////
 
-const { MessageButton, MessageEmbed, MessageActionRow } = require("discord.js");
+const { MessageButton, MessageEmbed, MessageActionRow, MessageAttachment } = require("discord.js");
+const Canvas = require('canvas');
+const fs = require('fs');
 
 const express = require('express');
 
@@ -424,6 +426,364 @@ client.on('messageCreate', sasoky => {
 > <#1243118207611572336>` })
   }
 })
+/////////////////////////////////////
+
+/////////////نظام البروفايل/////////////
+const OWNER_ID = '862387695836725248';
+const creditsPath = './credits.json';
+let credits = {};
+
+if (fs.existsSync(creditsPath)) {
+  try {
+    credits = JSON.parse(fs.readFileSync(creditsPath));
+  } catch (e) {
+    console.error('Error loading credits.json:', e);
+    credits = {};
+  }
+} else {
+  credits = {};
+}
+
+function saveCredits() {
+  fs.writeFileSync(creditsPath, JSON.stringify(credits, null, 2));
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRequiredXP(level) {
+  const xpMap = {
+    20: 6944,
+    21: 1856 + 6944,
+    22: 2156 + 8800,
+    23: 2300 + 10956,
+    24: 2500 + 13256,
+    25: 2700 + 15756,
+    26: 2900 + 18456,
+    27: 3100 + 21356,
+    28: 3300 + 24456,
+    29: 3500 + 27756,
+    30: 3700 + 31256,
+    31: 3900 + 34956,
+    32: 4100 + 38856,
+    33: 4300 + 42956,
+    34: 4500 + 47256,
+    35: 4700 + 51756,
+    36: 4900 + 56456,
+    37: 5100 + 61356,
+    38: 5300 + 66456,
+    39: 5500 + 71756,
+    40: 5700 + 77256,
+    41: 5900 + 82956,
+    42: 6100 + 88856,
+    43: 6300 + 94956,
+    44: 6500 + 101256,
+    45: 6700 + 107756,
+    46: 6900 + 114456,
+    47: 7100 + 121356,
+    48: 7300 + 128456,
+    49: 7500 + 135756,
+    50: 7700 + 143256,
+    51: 7900 + 150956,
+    52: 8100 + 158856,
+    53: 8300 + 166956,
+    54: 8500 + 175256,
+    55: 8700 + 183756,
+    56: 8900 + 192456,
+    57: 9100 + 201356,
+    58: 9300 + 210456,
+    59: 9500 + 219756,
+    60: 9700 + 229256,
+  };
+
+  if (level > 60) {
+    return 9700 + (level - 60) * 200;
+  }
+
+  return xpMap[level] || 6944;
+}
+
+function formatNumber(num) {
+  if (num >= 1e9) return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+  if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (num >= 1e3) return (num / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+  return num.toString();
+}
+
+function isOwner(userId) {
+  return userId === OWNER_ID;
+}
+
+function getLastRank() {
+  let lastRank = 0;
+  for (const userId in credits) {
+    if (credits[userId].rank > lastRank) {
+      lastRank = credits[userId].rank;
+    }
+  }
+  return lastRank;
+}
+
+client.on('messageCreate', async message => {
+  if (message.author.bot) return;
+  
+  let targetUser = message.author;
+  if (!credits[targetUser.id]) {
+    const lvl = getRandomInt(20, 75);
+    credits[targetUser.id] = {
+      level: lvl,
+      rep: 0,
+      credits: getRandomInt(500, 2000),
+      rank: getLastRank() == 0 ? 1 : getLastRank() + 1,
+      totalXP: 0,
+      currentXP: 0,
+      msgs: 0,
+      requiredXP: getRequiredXP(lvl),
+    };
+    saveCredits();
+  }
+
+  const data = credits[targetUser.id];
+  data.msgs = (data.msgs || 0) + 1;
+
+  if (data.msgs >= 3) {
+    const gainedXP = 3;
+    data.currentXP = (data.currentXP || 0) + gainedXP;
+    data.totalXP = (data.totalXP || 0) + gainedXP;
+    data.msgs = 0;
+  }
+
+  let args, command;
+
+  if (message.content.startsWith(prefix)) {
+    args = message.content.slice(prefix.length).trim().split(/ +/);
+    command = args.shift().toLowerCase();
+  } else {
+    args = message.content.trim().split(/ +/);
+    command = args.shift()?.toLowerCase();
+  }
+
+  if (['بروفايل', 'profile', 'p'].includes(command)) {
+    let target1 =
+      message.mentions.users.first() ||
+      (args[0] ? message.client.users.cache.get(args[0]) : null) ||
+      message.author;
+
+    let targetData = credits[target1.id] || {
+      level: 33,
+      rep: 0,
+      credits: 1070000000,
+      rank: 2714336,
+      totalXP: 77347,
+      currentXP: 722,
+      requiredXP: 4652,
+    };
+
+    if (typeof targetData.level !== 'number' || isNaN(targetData.level)) targetData.level = 33;
+    if (typeof targetData.rep !== 'number' || isNaN(targetData.rep)) targetData.rep = 0;
+    if (typeof targetData.credits !== 'number' || isNaN(targetData.credits)) targetData.credits = getRandomInt(500, 2000);
+    if (typeof targetData.rank !== 'number' || isNaN(targetData.rank)) targetData.rank = getRandomInt(1, 10000000);
+    if (typeof targetData.totalXP !== 'number' || isNaN(targetData.totalXP)) targetData.totalXP = 0;
+    if (typeof targetData.currentXP !== 'number' || isNaN(targetData.currentXP)) targetData.currentXP = 0;
+    if (typeof targetData.requiredXP !== 'number' || isNaN(targetData.requiredXP)) targetData.requiredXP = getRequiredXP(targetData.level);
+
+    while (targetData.currentXP >= targetData.requiredXP && targetData.level < 60) {
+      targetData.currentXP -= targetData.requiredXP;
+      targetData.level++;
+      targetData.requiredXP = getRequiredXP(targetData.level);
+    }
+
+    // إنشاء الكانفاس
+    const canvas = Canvas.createCanvas(400, 600);
+    const ctx = canvas.getContext('2d');
+
+    // رسم الخلفية المتدرجة
+    const gradient = ctx.createLinearGradient(0, 0, 400, 600);
+    gradient.addColorStop(0, '#8B5CF6');    // بنفسجي فاتح
+    gradient.addColorStop(0.3, '#A855F7');  // بنفسجي متوسط
+    gradient.addColorStop(0.6, '#7C3AED');  // بنفسجي
+    gradient.addColorStop(1, '#5B21B6');    // بنفسجي غامق
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 600);
+
+    // رسم الأشكال الهندسية للخلفية
+    ctx.globalAlpha = 0.1;
+    for (let i = 0; i < 20; i++) {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(Math.random() * 400, Math.random() * 600, Math.random() * 100, Math.random() * 100);
+    }
+    ctx.globalAlpha = 1;
+
+    // رسم صورة المستخدم
+    try {
+      const avatar = await Canvas.loadImage(target1.displayAvatarURL({ format: 'png', size: 256 }));
+      const avatarSize = 80;
+      const avatarX = 30;
+      const avatarY = 30;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(avatarX + avatarSize / 2, avatarY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(avatar, avatarX, avatarY, avatarSize, avatarSize);
+      ctx.restore();
+
+      // رسم إطار حول الصورة
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(avatarX + avatarSize / 2, avatarY + avatarSize / 2, avatarSize / 2 + 2, 0, Math.PI * 2);
+      ctx.stroke();
+    } catch (error) {
+      console.error('Error loading avatar:', error);
+    }
+
+    // رسم اسم المستخدم
+    ctx.font = 'bold 24px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'left';
+    ctx.fillText(target1.username, 130, 60);
+
+    // رسم أيقونة السيرفر
+    try {
+      const serverIconURL = message.guild.iconURL({ format: 'png', size: 64 });
+      if (serverIconURL) {
+        const serverIcon = await Canvas.loadImage(serverIconURL);
+        const iconSize = 30;
+        const iconX = 350;
+        const iconY = 20;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(iconX + iconSize / 2, iconY + iconSize / 2, iconSize / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(serverIcon, iconX, iconY, iconSize, iconSize);
+        ctx.restore();
+      }
+    } catch (error) {
+      console.error('Error loading server icon:', error);
+    }
+
+    // رسم معلومات المستوى والنقاط
+    const startY = 150;
+    const lineHeight = 80;
+
+    // LVL
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#E5E7EB';
+    ctx.textAlign = 'left';
+    ctx.fillText('LVL', 30, startY);
+    
+    ctx.font = 'bold 36px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(targetData.level.toString(), 30, startY + 35);
+
+    // REP
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#E5E7EB';
+    ctx.fillText('REP', 30, startY + lineHeight);
+    
+    ctx.font = 'bold 32px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(`+${targetData.rep}`, 30, startY + lineHeight + 35);
+
+    // CREDITS
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#E5E7EB';
+    ctx.fillText('CREDITS', 30, startY + lineHeight * 2);
+    
+    ctx.font = 'bold 28px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(formatNumber(targetData.credits), 30, startY + lineHeight * 2 + 35);
+
+    // RANK
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#E5E7EB';
+    ctx.fillText('RANK', 30, startY + lineHeight * 3);
+    
+    ctx.font = 'bold 28px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillText(targetData.rank.toString(), 30, startY + lineHeight * 3 + 35);
+
+    // رسم شريط التقدم في الأسفل
+    const barY = 520;
+    const barHeight = 40;
+    const barWidth = 340;
+    const barX = 30;
+
+    // خلفية الشريط
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.fillRect(barX, barY, barWidth, barHeight);
+
+    // الشريط المملوء
+    const progress = Math.min((targetData.currentXP / targetData.requiredXP) * 100, 100);
+    const filledWidth = (progress / 100) * barWidth;
+    
+    ctx.fillStyle = '#374151';
+    ctx.fillRect(barX, barY, filledWidth, barHeight);
+
+    // نص الشريط
+    ctx.font = 'bold 14px Arial';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${targetData.currentXP} / ${targetData.requiredXP}`, barX + barWidth / 2, barY + barHeight / 2 + 5);
+
+    // نص TOTAL XP
+    ctx.font = 'bold 12px Arial';
+    ctx.fillStyle = '#E5F2FF';
+    ctx.fillText(`TOTAL XP: ${targetData.totalXP}`, barX + barWidth / 2, barY + barHeight + 20);
+
+    const attachment = new MessageAttachment(canvas.toBuffer(), 'profile.png');
+    message.reply({ files: [attachment] });
+  }
+
+  else if (command === 'addrep') {
+    if (!isOwner(message.author.id)) return message.reply('You are not authorized to use this command.');
+    const user = message.mentions.users.first();
+    if (!user) return message.reply('Please mention a user to add rep.');
+
+    if (!credits[user.id]) {
+      credits[user.id] = {
+        level: getRandomInt(20, 75),
+        rep: 0,
+        credits: getRandomInt(500, 2000),
+        rank: getRandomInt(1, 10000000),
+        totalXP: 0,
+        currentXP: 0,
+        requiredXP: getRequiredXP(20),
+      };
+    }
+    credits[user.id].rep = (credits[user.id].rep || 0) + 1;
+    saveCredits();
+    message.channel.send(`Added 1 rep to ${user.username}. Total rep: ${credits[user.id].rep}`);
+  }
+
+  else if (command === 'removerep') {
+    if (!isOwner(message.author.id)) return message.reply('You are not authorized to use this command.');
+    const user = message.mentions.users.first();
+    if (!user) return message.reply('Please mention a user to remove rep.');
+
+    if (!credits[user.id]) {
+      credits[user.id] = {
+        level: getRandomInt(20, 75),
+        rep: 0,
+        credits: getRandomInt(500, 2000),
+        rank: getRandomInt(1, 10000000),
+        totalXP: 0,
+        currentXP: 0,
+        requiredXP: getRequiredXP(20),
+      };
+    }
+    credits[user.id].rep = Math.max(0, (credits[user.id].rep || 0) - 1);
+    saveCredits();
+    message.channel.send(`Removed 1 rep from ${user.username}. Total rep: ${credits[user.id].rep}`);
+  }
+});
+
 /////////////////////////////////////
 
 
