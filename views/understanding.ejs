@@ -1,21 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><%= title %> - دليل سند</title>
-  <meta name="description" content="فهم الإدمان كمرض دماغي، علامات الخطر، الأنواع، وتأثيره على الأسرة." />
-  <meta property="og:locale" content="ar" />
-  <meta property="og:title" content="فهم الإدمان للأسرة والمحيطين" />
-  <meta property="og:description" content="شرح مبسط وعلمي مع إرشادات عملية للمحيطين بالمدمن." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = { theme: { extend: { colors: { surface: '#0b1220' }, fontFamily: { sans: ['Cairo','Tajawal','ui-sans-serif'] } } } }
-  </script>
-  <link rel="stylesheet" href="/public/style.css" />
+  <%- include('partials/_head'); %>
 </head>
 <body class="bg-surface text-white antialiased">
   <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>

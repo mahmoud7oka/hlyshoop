@@ -1,14 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><%= title %> - دليل سند</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: { colors: { surface: '#0b1220' } } } }
-  </script>
-  <link rel="stylesheet" href="/public/style.css" />
+  <%- include('partials/_head'); %>
 </head>
 <body class="bg-surface text-white antialiased">
   <%- include('partials/_header'); %>

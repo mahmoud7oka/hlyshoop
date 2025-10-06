@@ -31,6 +31,8 @@ app.use((req, res, next) => {
     description: 'مصدر موثوق وشامل لتعليم وتمكين من يساند المدمنين: الأهل، الأصدقاء، المعلمون، الأطباء، والجمهور.',
     baseUrl: `${req.protocol}://${req.get('host')}`,
   };
+  // expose request to templates (for canonical/og:url)
+  res.locals.req = req;
   next();
 });
 
@@ -59,12 +61,37 @@ app.get('/media', (req, res) => {
   res.render('media', { title: 'المكتبة المرئية والصوتية' });
 });
 
+// SEO: robots.txt
+app.get('/robots.txt', (req, res) => {
+  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  res.type('text/plain').send([
+    'User-agent: *',
+    'Allow: /',
+    `Sitemap: ${baseUrl}/sitemap.xml`,
+    ''
+  ].join('\n'));
+});
+
+// SEO: sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  const paths = ['/', '/understanding', '/guide', '/recovery', '/self-care', '/media'];
+  const urls = paths.map(p => `    <url>\n      <loc>${baseUrl}${p}</loc>\n      <changefreq>weekly</changefreq>\n      <priority>${p === '/' ? '1.0' : '0.8'}</priority>\n    </url>`).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`;
+  res.type('application/xml').send(xml);
+});
+
+// Health check
+app.get('/healthz', (req, res) => {
+  res.type('text/plain').send('ok');
+});
+
 // 404
 app.use((req, res) => {
   res.status(404).render('not-found', { title: 'الصفحة غير موجودة' });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.WEB_PORT || process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Daleel Sanad web server listening on http://localhost:${port}`);
 });
