@@ -1,0 +1,20 @@
+/* Base Arabic fonts and luxurious look */
+:root {
+  --gold: #d4af37;
+}
+html { scroll-behavior: smooth; }
+body { font-family: Cairo, Tajawal, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+
+/***** Cards subtle hover *****/
+.group:hover .group-hover\:translate-x-1 { transform: translateX(-0.25rem); }
+
+/***** Fine-grain tweaks for RTL *****/
+[dir="rtl"] .list-disc { list-style-position: inside; }
+
+/***** Elevation *****/
+.shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+
+/***** Media placeholders *****/
+.aspect-video { position: relative; }
+.aspect-video::before { content: ""; display: block; padding-bottom: 56.25%; }
+.aspect-video > * { position: absolute; inset: 0; }

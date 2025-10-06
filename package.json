@@ -1,17 +1,21 @@
 {
   "name": "shop-v-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord bot and Daleel Sanad website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:web": "node web.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "discord.js": "^13.7.0",
+    "ejs": "^3.1.10",
     "express": "^4.18.1",
+    "helmet": "^7.1.0",
     "ms": "^2.1.3",
     "node": "^17.7.2",
     "pro.db": "^3.0.7"

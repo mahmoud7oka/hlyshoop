@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> - دليل سند</title>
+  <meta name="description" content="إرشادات عملية للمواجهة، إيجاد العلاج، ووضع الحدود الصحية لمن يساندون المدمنين." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { surface: '#0b1220' }, fontFamily: { sans: ['Cairo','Tajawal','ui-sans-serif'] } } } }
+  </script>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-black">إرشادات المساعدة العملية</h1>
+      <p class="text-white/70 mt-3 leading-8">خطوات واضحة وقابلة للتنفيذ لمساندة من تحب، دون تمكين الإدمان.</p>
+    </header>
+
+    <section id="conversation" class="rounded-2xl bg-white/5 border border-white/10 p-6 mb-8">
+      <h2 class="text-2xl font-extrabold mb-3">كيفية المواجهة (التدخل)</h2>
+      <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+        <li>اختر توقيتًا هادئًا بعيدًا عن التأثيرات والضغوط.</li>
+        <li>استخدم لغة «أنا» بدلًا من اللوم: «أنا قلق لأن...»</li>
+        <li>حدد أمثلة واضحة للسلوكيات المقلقة وتأثيرها عليك.</li>
+        <li>اقترح خطوات واقعية: حجز موعد تقييم، التواصل مع مختص.</li>
+      </ul>
+    </section>
+
+    <section class="rounded-2xl bg-white/5 border border-white/10 p-6 mb-8">
+      <h2 class="text-2xl font-extrabold mb-3">إيجاد العلاج</h2>
+      <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+        <li>أنواع العلاج: إزالة السموم، العيادات الخارجية، الإقامة، مجموعات الدعم.</li>
+        <li>اختيار المركز: الاعتمادات، خبرة الفريق، خطة متابعة بعد العلاج.</li>
+        <li>التمويل: تغطية تأمينية، خيارات دفع، دعم مجتمعي.</li>
+      </ul>
+    </section>
+
+    <section id="boundaries" class="rounded-2xl bg-white/5 border border-white/10 p-6 mb-8">
+      <h2 class="text-2xl font-extrabold mb-3">وضع الحدود</h2>
+      <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+        <li>لا تموّل السلوك الإدماني (مثل المال غير المُساءل عنه).</li>
+        <li>اتفق على قواعد واضحة للمنزل والاحترام المتبادل.</li>
+        <li>اجعل الحدود قابلة للتنفيذ والتشغيل، وتواصلها بهدوء.</li>
+        <li>مثال: «لن أقترض لك المال، لكن سأدعمك بحضور جلسات العلاج.»</li>
+      </ul>
+    </section>
+
+    <div class="mt-8 flex gap-3">
+      <a href="/recovery" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-amber-300 to-yellow-500 text-surface font-extrabold px-5 py-3">الانتقال إلى دعم المتعافي</a>
+      <a href="/self-care" class="inline-flex items-center gap-2 rounded-xl bg-white/10 text-white font-bold px-5 py-3">العناية بالذات للمُعين</a>
+    </div>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> - دليل سند</title>
+  <meta name="description" content="مقابلات مع خبراء، فيديوهات حوارية، وإرشادات مسموعة لتمكين المساندين." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { surface: '#0b1220' }, fontFamily: { sans: ['Cairo','Tajawal','ui-sans-serif'] } } } }
+  </script>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-black">المكتبة المرئية والصوتية</h1>
+      <p class="text-white/70 mt-3 leading-8">محتوى مُختار خصيصًا للمُعينين: توعية منهجية، أدوات عملية، وتمارين تهدئة.</p>
+    </header>
+
+    <section class="grid lg:grid-cols-2 gap-8">
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-xl font-extrabold mb-3">مقابلات مع خبراء</h2>
+        <div class="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Expert Talk" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </article>
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-xl font-extrabold mb-3">إرشادات مسموعة</h2>
+        <audio controls class="w-full">
+          <source src="/public/sample-calming.mp3" type="audio/mpeg" />
+          متصفحك لا يدعم تشغيل الصوتيات.
+        </audio>
+        <p class="text-white/70 mt-3">تمرين تنفس قصير يمكن الاستماع إليه عند التوتر.</p>
+      </article>
+    </section>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>

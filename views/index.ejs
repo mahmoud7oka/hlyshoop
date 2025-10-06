@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %></title>
+  <meta name="description" content="دليل شامل وموثوق لتعليم وتمكين من يساند المدمنين: الأهل، الأصدقاء، المعلمون، الأطباء، والجمهور." />
+  <meta property="og:locale" content="ar" />
+  <meta property="og:title" content="دليل سند" />
+  <meta property="og:description" content="لست وحدك في رحلة المساعدة. نساعدك لتسند من تحب." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="<%= site.baseUrl %>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surface: '#0b1220',
+            brand: {
+              50: '#fff7e6', 100: '#ffedcc', 200: '#ffe0a3', 300: '#ffd173', 400: '#ffc241', 500: '#ffb400',
+              600: '#e6a200', 700: '#cc9000', 800: '#b37f00', 900: '#996d00'
+            }
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Tajawal', 'ui-sans-serif', 'system-ui']
+          },
+          boxShadow: {
+            glow: '0 10px 40px -10px rgba(245, 158, 11, .35)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent),radial-gradient(800px_400px_at_0%_20%,rgba(236,72,153,0.12),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main>
+    <section class="pt-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-amber-200">
+            <span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+            جديد: موقع شامل لمساندة من يُسندون من يحبون
+          </div>
+          <h1 class="text-4xl sm:text-5xl font-black leading-[1.2]">
+            دليل سند: لست وحدك في رحلة المساعدة.
+            <span class="block text-amber-300">نُعينك لتسند من تُحب.</span>
+          </h1>
+          <p class="text-white/80 text-lg leading-8">محتوى موثوق، خطوات عملية، وموارد مصممة خصيصًا للأهل، الأصدقاء، المعلمين، الأطباء، والجمهور العام لمساندة الأشخاص الذين يعانون من الإدمان.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/guide" class="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-amber-300 to-yellow-500 text-surface font-extrabold px-6 py-3 shadow-glow ring-1 ring-white/20 hover:scale-[1.02] active:scale-100 transition">ابدأ دليلك: كيف أتعامل مع...؟</a>
+            <a href="/understanding" class="inline-flex items-center gap-2 rounded-2xl bg-white/10 text-white font-bold px-6 py-3 hover:bg-white/15 transition">فهم الإدمان</a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 shadow-2xl ring-1 ring-white/10 grid place-items-center">
+            <div class="text-center p-8">
+              <div class="text-amber-200 font-extrabold text-2xl mb-2">تمكين • توعية • سند</div>
+              <p class="text-white/70 leading-8">إطار متكامل لمساندة من يُساند المدمن: لغة داعمة، حدود صحية، خطة علاج، بيئة تعافٍ، وعناية بالذات.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-extrabold mb-6">أبرز المقالات</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <a href="/guide#conversation" class="group rounded-2xl bg-white/5 border border-white/10 p-6 hover:border-amber-300/40 hover:bg-white/10 transition">
+            <div class="text-amber-300 font-bold mb-2">كيف أتحدث مع ابني؟</div>
+            <p class="text-white/70 leading-7">نماذج جُمل داعمة، توقيت التدخل، وإدارة الحوار بلا لوم.</p>
+            <div class="mt-4 text-amber-200 font-extrabold group-hover:translate-x-1 transition">اقرأ المزيد →</div>
+          </a>
+          <a href="/guide#boundaries" class="group rounded-2xl bg-white/5 border border-white/10 p-6 hover:border-amber-300/40 hover:bg-white/10 transition">
+            <div class="text-amber-300 font-bold mb-2">ما هي حدود المساعدة؟</div>
+            <p class="text-white/70 leading-7">تعريف الحدود الصحية، أمثلة عملية، وكيفية الالتزام بها.</p>
+            <div class="mt-4 text-amber-200 font-extrabold group-hover:translate-x-1 transition">اقرأ المزيد →</div>
+          </a>
+          <a href="/self-care" class="group rounded-2xl bg-white/5 border border-white/10 p-6 hover:border-amber-300/40 hover:bg-white/10 transition">
+            <div class="text-amber-300 font-bold mb-2">كيف أعتني بصحتي النفسية؟</div>
+            <p class="text-white/70 leading-7">روتين واقعي للراحة، الدعم، وإعادة الشحن دون شعور بالذنب.</p>
+            <div class="mt-4 text-amber-200 font-extrabold group-hover:translate-x-1 transition">اقرأ المزيد →</div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>

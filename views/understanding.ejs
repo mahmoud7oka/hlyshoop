@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> - دليل سند</title>
+  <meta name="description" content="فهم الإدمان كمرض دماغي، علامات الخطر، الأنواع، وتأثيره على الأسرة." />
+  <meta property="og:locale" content="ar" />
+  <meta property="og:title" content="فهم الإدمان للأسرة والمحيطين" />
+  <meta property="og:description" content="شرح مبسط وعلمي مع إرشادات عملية للمحيطين بالمدمن." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { surface: '#0b1220' }, fontFamily: { sans: ['Cairo','Tajawal','ui-sans-serif'] } } } }
+  </script>
+  <link rel="stylesheet" href="/public/style.css" />
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-black">فهم الإدمان للأسرة والمحيطين</h1>
+      <p class="text-white/70 mt-3 leading-8">الخطوة الأولى للمساندة الفعالة هي الفهم الدقيق لطبيعة الإدمان وتأثيراته على الشخص وعلى من حوله.</p>
+    </header>
+
+    <section class="space-y-8">
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">الإدمان كمرض</h2>
+        <p class="text-white/80 leading-8">الإدمان حالة مزمنة تؤثر على دوائر المكافأة واتخاذ القرار في الدماغ، مما يصعّب ضبط السلوك رغم النتائج السلبية. لا يعني ذلك غياب المسؤولية، لكنه يفسر لماذا يحتاج الأمر إلى علاج منظم ودعم مستمر.</p>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">علامات الخطر</h2>
+        <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+          <li>تغيرات ملحوظة في المزاج والسلوك، الانسحاب الاجتماعي، أو الكذب المتكرر.</li>
+          <li>هبوط في الأداء الأكاديمي/المهني أو التغيب المتكرر.</li>
+          <li>مشكلات مالية غير مفسَّرة أو طلب المال باستمرار.</li>
+          <li>انقطاع الهوايات والاهتمامات السابقة، واضطرابات النوم والشهية.</li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">أنواع الإدمان</h2>
+        <p class="text-white/80 leading-8">تتنوع بين المواد (الكحول، المواد الأفيونية، المنبهات) والسلوكيات (القمار، الألعاب، الإباحيات). التفريق يساعد على اختيار الأساليب العلاجية الأنسب.</p>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">تأثير الإدمان عليك</h2>
+        <p class="text-white/80 leading-8">قد تعاني الأسرة من القلق، الإرهاق، والغضب. الاعتراف بمشاعرك وطلب الدعم ليس أنانية؛ إنه شرط للاستمرار بمساندة صحية.</p>
+      </article>
+    </section>
+
+    <div class="mt-10">
+      <a href="/guide" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-amber-300 to-yellow-500 text-surface font-extrabold px-5 py-3">تابع إلى الإرشادات العملية</a>
+    </div>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>
