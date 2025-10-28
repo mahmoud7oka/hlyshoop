@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <%- include('partials/_head'); %>
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-black">دعم المتعافي (ما بعد العلاج)</h1>
+      <p class="text-white/70 mt-3 leading-8">التعافي رحلة طويلة تتطلب بيئة داعمة وخططًا واضحة للوقاية من الانتكاسة.</p>
+    </header>
+
+    <section class="space-y-8">
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">بيئة منزلية صحية</h2>
+        <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+          <li>تنظيم مواعيد النوم والطعام والأنشطة اليومية.</li>
+          <li>إبعاد المحفزات والمواد من المنزل.</li>
+          <li>التواصل المفتوح وإشراك الأسرة في خطة التعافي.</li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">التعامل مع الانتكاسة</h2>
+        <p class="text-white/80 leading-8">إذا حدثت انتكاسة، تعاملوا معها كإشارة تحتاج خطة تعديل، لا كفشل. امتنع عن اللوم والتهويل، وعودوا سريعًا للتواصل مع المعالج لإعادة الضبط.</p>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">دور الأصدقاء</h2>
+        <p class="text-white/80 leading-8">قدّم دعمًا إنسانيًا دون القيام بدور المعالج: استمع، ذكِّر بالخطة، شارك بأنشطة صحية، واحتفظ بحدودك.</p>
+      </article>
+    </section>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>

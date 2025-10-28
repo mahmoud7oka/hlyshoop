@@ -1,0 +1,33 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><%= title %></title>
+<meta name="description" content="<%= site.description %>" />
+<link rel="canonical" href="<%= site.baseUrl + req.originalUrl %>" />
+<meta property="og:locale" content="ar_AR" />
+<meta property="og:title" content="<%= title %>" />
+<meta property="og:description" content="<%= site.description %>" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="<%= site.baseUrl + req.originalUrl %>" />
+<meta property="og:image" content="<%= site.baseUrl %>/public/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="<%= title %>" />
+<meta name="twitter:description" content="<%= site.description %>" />
+<meta name="twitter:image" content="<%= site.baseUrl %>/public/og-image.png" />
+<link rel="icon" href="/public/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/public/favicon.png" type="image/png" />
+<link rel="manifest" href="/public/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { surface: '#0b1220' },
+        fontFamily: { sans: ['Cairo','Tajawal','ui-sans-serif'] }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="/public/style.css" />

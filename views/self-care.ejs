@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <%- include('partials/_head'); %>
+</head>
+<body class="bg-surface text-white antialiased">
+  <div class="fixed inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(250,204,21,0.10),transparent)]"></div>
+  <%- include('partials/_header'); %>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-black">العناية الذاتية للمُعين</h1>
+      <p class="text-white/70 mt-3 leading-8">أنت تستحق الدعم. الاعتناء بذاتك شرط لمساندة طويلة الأمد.</p>
+    </header>
+
+    <section class="space-y-8">
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">مصادرك الداخلية</h2>
+        <ul class="list-disc pr-6 space-y-2 text-white/80 leading-8">
+          <li>روتين بسيط للنوم والحركة والتغذية.</li>
+          <li>تقنيات تهدئة: التنفس 4-4-4، استرخاء العضلات، تأملات قصيرة.</li>
+          <li>حدود نفسية: لا تتحمل ما ليس لك، ولا تنعزل.</li>
+        </ul>
+      </article>
+
+      <article class="rounded-2xl bg-white/5 border border-white/10 p-6">
+        <h2 class="text-2xl font-extrabold mb-3">مصادر دعم الأسرة</h2>
+        <p class="text-white/80 leading-8">ابحث عن مجموعات مثل «ألانون/ألانين» أو مجموعات أهالي المدمنين في مجتمعك، واستعن بإرشاد مختصين عند الحاجة.</p>
+      </article>
+    </section>
+  </main>
+
+  <%- include('partials/_footer'); %>
+</body>
+</html>
